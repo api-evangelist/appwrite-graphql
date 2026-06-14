@@ -1,0 +1,576 @@
+# Appwrite GraphQL Schema
+# Source: derived from Appwrite GitHub source (src/Appwrite/GraphQL/Schema.php,
+#         Types/Mapper.php) and published GraphQL client examples
+#         (docs/examples/1.2.x/client-graphql/examples/).
+# Endpoint: https://cloud.appwrite.io/v1/graphql
+# Note: Introspection is disabled on production; this SDL was constructed from
+#       published source code and official example queries.
+
+scalar JSON
+
+# ─────────────────────────────────────────────
+# Shared / utility types
+# ─────────────────────────────────────────────
+
+"""Arbitrary key-value preference bag."""
+type Preferences {
+  """JSON-encoded preference data."""
+  data: String
+}
+
+# ─────────────────────────────────────────────
+# Account
+# ─────────────────────────────────────────────
+
+"""An Appwrite user account."""
+type Account {
+  _id: String
+  _createdAt: String
+  _updatedAt: String
+  name: String
+  registration: String
+  status: Boolean
+  passwordUpdate: String
+  email: String
+  phone: String
+  emailVerification: Boolean
+  phoneVerification: Boolean
+  prefs: Preferences
+}
+
+"""A JSON Web Token issued for the current session."""
+type Jwt {
+  jwt: String
+}
+
+"""A magic-URL / phone token."""
+type Token {
+  _id: String
+  _createdAt: String
+  userId: String
+  secret: String
+  expire: String
+}
+
+# ─────────────────────────────────────────────
+# Sessions
+# ─────────────────────────────────────────────
+
+"""An authenticated session."""
+type Session {
+  _id: String
+  _createdAt: String
+  userId: String
+  expire: String
+  provider: String
+  providerUid: String
+  providerAccessToken: String
+  providerAccessTokenExpiry: String
+  providerRefreshToken: String
+  ip: String
+  osCode: String
+  osName: String
+  osVersion: String
+  clientType: String
+  clientCode: String
+  clientName: String
+  clientVersion: String
+  clientEngine: String
+  clientEngineVersion: String
+  deviceName: String
+  deviceBrand: String
+  deviceModel: String
+  countryCode: String
+  countryName: String
+  current: Boolean
+}
+
+"""Paginated list of sessions."""
+type SessionList {
+  total: Int
+  sessions: [Session]
+}
+
+# ─────────────────────────────────────────────
+# Databases & Documents
+# ─────────────────────────────────────────────
+
+"""A document stored in an Appwrite collection."""
+type Document {
+  _id: String
+  _collectionId: String
+  _databaseId: String
+  _createdAt: String
+  _updatedAt: String
+  _permissions: [String]
+  """JSON-encoded document data (custom attributes)."""
+  data: String
+}
+
+"""Paginated list of documents."""
+type DocumentList {
+  total: Int
+  documents: [Document]
+}
+
+# ─────────────────────────────────────────────
+# Storage
+# ─────────────────────────────────────────────
+
+"""A file stored in an Appwrite storage bucket."""
+type File {
+  _id: String
+  bucketId: String
+  _createdAt: String
+  _updatedAt: String
+  _permissions: [String]
+  name: String
+  signature: String
+  mimeType: String
+  sizeOriginal: Int
+  chunksTotal: Int
+  chunksUploaded: Int
+}
+
+"""Paginated list of files."""
+type FileList {
+  total: Int
+  files: [File]
+}
+
+# ─────────────────────────────────────────────
+# Teams & Memberships
+# ─────────────────────────────────────────────
+
+"""An Appwrite team."""
+type Team {
+  _id: String
+  _createdAt: String
+  _updatedAt: String
+  name: String
+  total: Int
+}
+
+"""Paginated list of teams."""
+type TeamList {
+  total: Int
+  teams: [Team]
+}
+
+"""A team membership record."""
+type Membership {
+  _id: String
+  _createdAt: String
+  _updatedAt: String
+  userId: String
+  userName: String
+  userEmail: String
+  teamId: String
+  teamName: String
+  invited: String
+  joined: String
+  confirm: Boolean
+  roles: [String]
+}
+
+"""Paginated list of memberships."""
+type MembershipList {
+  total: Int
+  memberships: [Membership]
+}
+
+# ─────────────────────────────────────────────
+# Functions & Executions
+# ─────────────────────────────────────────────
+
+"""The result of a cloud function execution."""
+type Execution {
+  _id: String
+  _createdAt: String
+  _updatedAt: String
+  _permissions: [String]
+  functionId: String
+  trigger: String
+  status: String
+  statusCode: Int
+  response: String
+  stdout: String
+  stderr: String
+  duration: Float
+}
+
+"""Paginated list of executions."""
+type ExecutionList {
+  total: Int
+  executions: [Execution]
+}
+
+# ─────────────────────────────────────────────
+# Localization
+# ─────────────────────────────────────────────
+
+"""Locale information for the requesting IP."""
+type Locale {
+  ip: String
+  countryCode: String
+  country: String
+  continentCode: String
+  continent: String
+  eu: Boolean
+  currency: String
+}
+
+"""A country entry."""
+type Country {
+  name: String
+  code: String
+}
+
+"""Paginated list of countries."""
+type CountryList {
+  total: Int
+  countries: [Country]
+}
+
+"""A continent entry."""
+type Continent {
+  name: String
+  code: String
+}
+
+"""Paginated list of continents."""
+type ContinentList {
+  total: Int
+  continents: [Continent]
+}
+
+"""A currency entry."""
+type Currency {
+  symbol: String
+  name: String
+  symbolNative: String
+  decimalDigits: Int
+  rounding: Float
+  code: String
+  namePlural: String
+}
+
+"""Paginated list of currencies."""
+type CurrencyList {
+  total: Int
+  currencies: [Currency]
+}
+
+"""A language entry."""
+type Language {
+  name: String
+  code: String
+  nativeName: String
+}
+
+"""Paginated list of languages."""
+type LanguageList {
+  total: Int
+  languages: [Language]
+}
+
+"""A phone-code entry."""
+type Phone {
+  code: String
+  countryCode: String
+  countryName: String
+}
+
+"""Paginated list of phone codes."""
+type PhoneList {
+  total: Int
+  phones: [Phone]
+}
+
+# ─────────────────────────────────────────────
+# Query root
+# ─────────────────────────────────────────────
+
+type Query {
+  # Account
+  """Get the currently authenticated account."""
+  accountGet: Account
+
+  """Get a specific session by ID (use "current" for the active session)."""
+  accountGetSession(sessionId: String!): Session
+
+  """List all sessions for the current account."""
+  accountListSessions: SessionList
+
+  """Get account preferences."""
+  accountGetPrefs: Preferences
+
+  # Databases
+  """List documents in a collection."""
+  databasesListDocuments(
+    databaseId: String!
+    collectionId: String!
+    queries: [String]
+  ): DocumentList
+
+  """Get a single document."""
+  databasesGetDocument(
+    databaseId: String!
+    collectionId: String!
+    documentId: String!
+  ): Document
+
+  # Storage
+  """List files in a bucket."""
+  storageListFiles(
+    bucketId: String!
+    queries: [String]
+    search: String
+  ): FileList
+
+  """Get a file's metadata."""
+  storageGetFile(bucketId: String!, fileId: String!): File
+
+  """Get a file download URL."""
+  storageGetFileDownload(bucketId: String!, fileId: String!): File
+
+  """Get a file preview URL."""
+  storageGetFilePreview(bucketId: String!, fileId: String!): File
+
+  """Get a file view URL."""
+  storageGetFileView(bucketId: String!, fileId: String!): File
+
+  # Teams
+  """List all teams the current user belongs to."""
+  teamsList(queries: [String], search: String): TeamList
+
+  """Get a team by ID."""
+  teamsGet(teamId: String!): Team
+
+  """Get team preferences."""
+  teamsGetPrefs(teamId: String!): Preferences
+
+  """List memberships of a team."""
+  teamsListMemberships(teamId: String!, queries: [String]): MembershipList
+
+  """Get a specific team membership."""
+  teamsGetMembership(teamId: String!, membershipId: String!): Membership
+
+  # Functions
+  """List executions of a function."""
+  functionsListExecutions(
+    functionId: String!
+    queries: [String]
+    search: String
+  ): ExecutionList
+
+  """Get a specific execution."""
+  functionsGetExecution(functionId: String!, executionId: String!): Execution
+
+  # Localization
+  """Get locale data for the requesting IP."""
+  localeGet: Locale
+
+  """List all countries."""
+  localeListCountries: CountryList
+
+  """List EU countries."""
+  localeListCountriesEU: CountryList
+
+  """List country phone codes."""
+  localeListCountriesPhones: PhoneList
+
+  """List continents."""
+  localeListContinents: ContinentList
+
+  """List currencies."""
+  localeListCurrencies: CurrencyList
+
+  """List languages."""
+  localeListLanguages: LanguageList
+}
+
+# ─────────────────────────────────────────────
+# Mutation root
+# ─────────────────────────────────────────────
+
+type Mutation {
+  # Account – registration & session management
+  """Create a new account."""
+  accountCreate(
+    userId: String!
+    email: String!
+    password: String!
+    name: String
+  ): Account
+
+  """Create an email/password session."""
+  accountCreateEmailPasswordSession(
+    email: String!
+    password: String!
+  ): Session
+
+  """Create an anonymous session."""
+  accountCreateAnonymousSession: Session
+
+  """Create a JWT for the current session."""
+  accountCreateJWT: Jwt
+
+  """Send a magic-URL token to an email address."""
+  accountCreateMagicURLToken(
+    userId: String!
+    email: String!
+    url: String
+  ): Token
+
+  """Confirm a magic-URL token to create a session."""
+  accountUpdateMagicURLSession(
+    userId: String!
+    secret: String!
+  ): Session
+
+  """Create a phone (OTP) token."""
+  accountCreatePhoneToken(userId: String!, phone: String!): Token
+
+  """Confirm a phone OTP to create a session."""
+  accountUpdatePhoneSession(userId: String!, secret: String!): Session
+
+  """Initiate password recovery."""
+  accountCreateRecovery(email: String!, url: String!): Token
+
+  """Confirm password recovery and set new password."""
+  accountUpdateRecovery(
+    userId: String!
+    secret: String!
+    password: String!
+    passwordAgain: String!
+  ): Token
+
+  """Send email verification link."""
+  accountCreateVerification(url: String!): Token
+
+  """Confirm email verification."""
+  accountUpdateVerification(userId: String!, secret: String!): Token
+
+  """Send phone verification code."""
+  accountCreatePhoneVerification: Token
+
+  """Confirm phone verification."""
+  accountUpdatePhoneVerification(userId: String!, secret: String!): Token
+
+  # Account – profile updates
+  """Update account name."""
+  accountUpdateName(name: String!): Account
+
+  """Update account email."""
+  accountUpdateEmail(email: String!, password: String!): Account
+
+  """Update account password."""
+  accountUpdatePassword(password: String!, oldPassword: String): Account
+
+  """Update account phone."""
+  accountUpdatePhone(phone: String!, password: String!): Account
+
+  """Update account preferences."""
+  accountUpdatePrefs(prefs: JSON!): Account
+
+  """Block/unblock the current account."""
+  accountUpdateStatus: Account
+
+  """Delete a specific session."""
+  accountDeleteSession(sessionId: String!): String
+
+  """Delete all sessions (sign out everywhere)."""
+  accountDeleteSessions: String
+
+  # Databases
+  """Create a document in a collection."""
+  databasesCreateDocument(
+    databaseId: String!
+    collectionId: String!
+    documentId: String!
+    data: String!
+    permissions: [String]
+  ): Document
+
+  """Update a document."""
+  databasesUpdateDocument(
+    databaseId: String!
+    collectionId: String!
+    documentId: String!
+    data: String
+    permissions: [String]
+  ): Document
+
+  """Delete a document."""
+  databasesDeleteDocument(
+    databaseId: String!
+    collectionId: String!
+    documentId: String!
+  ): String
+
+  # Storage
+  """Delete a file."""
+  storageDeleteFile(bucketId: String!, fileId: String!): String
+
+  """Update a file's permissions or name."""
+  storageUpdateFile(
+    bucketId: String!
+    fileId: String!
+    name: String
+    permissions: [String]
+  ): File
+
+  # Teams
+  """Create a team."""
+  teamsCreate(teamId: String!, name: String!, roles: [String]): Team
+
+  """Update a team's name."""
+  teamsUpdateName(teamId: String!, name: String!): Team
+
+  """Update team preferences."""
+  teamsUpdatePrefs(teamId: String!, prefs: JSON!): Preferences
+
+  """Delete a team."""
+  teamsDelete(teamId: String!): String
+
+  """Invite a user to a team."""
+  teamsCreateMembership(
+    teamId: String!
+    roles: [String]!
+    email: String
+    userId: String
+    phone: String
+    url: String
+    name: String
+  ): Membership
+
+  """Update membership roles."""
+  teamsUpdateMembership(
+    teamId: String!
+    membershipId: String!
+    roles: [String]!
+  ): Membership
+
+  """Accept or reject a team membership invite."""
+  teamsUpdateMembershipStatus(
+    teamId: String!
+    membershipId: String!
+    userId: String!
+    secret: String!
+  ): Membership
+
+  """Remove a member from a team."""
+  teamsDeleteMembership(teamId: String!, membershipId: String!): String
+
+  # Functions
+  """Trigger a cloud function execution."""
+  functionsCreateExecution(
+    functionId: String!
+    body: String
+    async: Boolean
+    xpath: String
+    method: String
+    headers: JSON
+  ): Execution
+}
