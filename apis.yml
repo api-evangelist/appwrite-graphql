@@ -1,0 +1,61 @@
+aid: appwrite-graphql
+name: Appwrite GraphQL
+description: |
+  Appwrite GraphQL is a powerful API layer that exposes the full Appwrite backend-as-a-service
+  platform through a GraphQL interface, allowing developers to query and mutate any resource
+  type including databases, storage, users, and functions. It mirrors the complete Appwrite
+  REST API (except OAuth) with GraphQL advantages such as selection sets and query batching,
+  enabling precise data fetching and multiple operations in a single request.
+type: Index
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://appwrite.io
+baseURL: https://cloud.appwrite.io/v1/graphql
+created: 2026-06-14
+modified: 2026-06-14
+specificationVersion: '0.19'
+tags:
+  - GraphQL
+  - Backend as a Service
+  - BaaS
+  - Database
+  - Authentication
+  - Storage
+  - Open Source
+apis:
+  - aid: appwrite-graphql:graphql-api
+    name: Appwrite GraphQL GraphQL API
+    description: |
+      The Appwrite GraphQL API provides a unified GraphQL endpoint at /v1/graphql that exposes
+      all Appwrite platform resources including databases, users, storage buckets, and cloud
+      functions. It supports selection sets for targeted field retrieval, query batching for
+      multiple operations in a single request, and file uploads via multipart/form-data.
+    tags:
+      - GraphQL
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://appwrite.io/docs/apis/graphql
+    baseURL: https://cloud.appwrite.io/v1/graphql
+    properties:
+      - url: https://appwrite.io/docs/apis/graphql
+        type: Documentation
+      - url: graphql/appwrite-graphql-graphql.md
+        type: GraphQL
+common:
+  - url: https://appwrite.io
+    type: Website
+  - url: https://appwrite.io/docs/apis/graphql
+    type: Documentation
+  - url: https://www.linkedin.com/company/appwrite
+    type: LinkedIn
+  - url: https://github.com/appwrite
+    type: GitHubOrganization
+  - url: https://appwrite.io/pricing
+    type: Pricing
+  - url: plans/appwrite-graphql-plans.md
+    type: Plans
+  - url: rate-limits/appwrite-graphql-rate-limits.md
+    type: RateLimits
+  - url: finops/appwrite-graphql-finops.md
+    type: FinOps
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
