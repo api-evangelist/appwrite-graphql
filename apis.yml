@@ -40,6 +40,8 @@ apis:
       - url: graphql/appwrite-graphql-graphql.md
         type: GraphQL
 common:
+  - type: DomainSecurity
+    url: security/appwrite-graphql-domain-security.yml
   - url: https://appwrite.io
     type: Website
   - url: https://appwrite.io/docs/apis/graphql
@@ -56,6 +58,8 @@ common:
     type: RateLimits
   - url: finops/appwrite-graphql-finops.md
     type: FinOps
+  - url: https://appwrite.io/blog/rss.xml
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
